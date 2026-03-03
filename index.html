@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Oficial - Mecânica Sul</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background: #000;
+    overflow-x: hidden;
+}
+
+/* ===== VIDEO FUNDO FIXO CENTRALIZADO ===== */
+#bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -3;
+}
+
+/* ===== OVERLAY ===== */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.70);
+    z-index: -2;
+}
+
+/* ===== PARTICULAS ===== */
+#particles-js {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+}
+
+/* ===== CENTRALIZA CONTAINER ===== */
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15,15,15,0.92);
+    border: 1px solid #00ff88;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(0,255,136,0.5);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.8s ease-in-out;
+    color: #fff;
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo img {
+    width: 120px;
+    transition: 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.08);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #00ff88;
+    padding-bottom: 5px;
+}
+
+.input-group {
+    margin-bottom: 12px;
+}
+
+label {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    background: #000;
+    border: 1px solid #00ff88;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.parcerias {
+    margin-top: 10px;
+    border: 1px solid #00ff88;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.parcerias label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00cc6a;
+    box-shadow: 0 0 15px #00ff88;
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid #00ff88;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- VIDEO FUNDO -->
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="jfundo.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+<div id="particles-js"></div>
+
+<div class="wrapper">
+<div class="container">
+
+<div class="logo">
+    <img src="logo.png" alt="Logo Mecânica Sul">
+</div>
+
+<h1>Calculadora Oficial</h1>
+
+<h2>🔧 Serviços</h2>
+
+<div class="input-group">
+<label>Reparo (2.500)</label>
+<input type="number" id="reparo" placeholder="Quantidade">
+</div>
+
+<div class="input-group">
+<label>Troca de Pneu (2.500)</label>
+<input type="number" id="trocaPneu" placeholder="Quantidade">
+</div>
+
+<div class="input-group">
+<label>Tuning (valor do veículo)</label>
+<input type="number" id="tuningValor" placeholder="Ex: 300000">
+</div>
+
+<h2>🛒 Venda de Itens</h2>
+
+<div class="input-group">
+<label>Kit Reparo (3.500)</label>
+<input type="number" id="kitReparo" placeholder="Quantidade">
+</div>
+
+<div class="input-group">
+<label>Pneu (2.000)</label>
+<input type="number" id="pneu" placeholder="Quantidade">
+</div>
+
+<div class="input-group">
+<label>Pé de Cabra (2.500)</label>
+<input type="number" id="peCabra" placeholder="Quantidade">
+</div>
+
+<div class="input-group">
+<label>Corda (5.000)</label>
+<input type="number" id="corda" placeholder="Quantidade">
+</div>
+
+<div class="input-group">
+<label>Chave Inglesa (2.500)</label>
+<input type="number" id="chaveInglesa" placeholder="Quantidade">
+</div>
+
+<h2>🤝 Parcerias</h2>
+
+<div class="parcerias">
+<label><input type="radio" name="parceria" id="pgs"> PGS (Pegasus)</label>
+<label><input type="radio" name="parceria" id="gravata"> Os Gravata</label>
+</div>
+
+<button onclick="calcular()">CALCULAR TOTAL</button>
+
+<div class="resultado" id="resultado">
+Total: R$ 0
+</div>
+
+</div>
+</div>
+
+<script>
+function calcular() {
+
+let pgs = document.getElementById("pgs").checked;
+let gravata = document.getElementById("gravata").checked;
+
+let reparo = (parseFloat(document.getElementById("reparo").value) || 0) * 2500;
+let trocaPneu = (parseFloat(document.getElementById("trocaPneu").value) || 0) * 2500;
+
+let tuningBase = parseFloat(document.getElementById("tuningValor").value) || 0;
+let tuningPercent = 0.50;
+
+if (pgs) tuningPercent = 0.40;
+if (gravata) tuningPercent = 0.35;
+
+let tuning = tuningBase * tuningPercent;
+
+let kitValor = 3500;
+if (pgs || gravata) kitValor = 2000;
+
+let kitReparo = (parseFloat(document.getElementById("kitReparo").value) || 0) * kitValor;
+
+let pneu = (parseFloat(document.getElementById("pneu").value) || 0) * 2000;
+let peCabra = (parseFloat(document.getElementById("peCabra").value) || 0) * 2500;
+let corda = (parseFloat(document.getElementById("corda").value) || 0) * 5000;
+let chaveInglesa = (parseFloat(document.getElementById("chaveInglesa").value) || 0) * 2500;
+
+let total = reparo + trocaPneu + tuning + kitReparo + pneu + peCabra + corda + chaveInglesa;
+
+document.getElementById("resultado").innerText =
+"Total: R$ " + total.toLocaleString('pt-BR');
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80 },
+    color: { value: "#00ff88" },
+    shape: { type: "circle" },
+    opacity: { value: 0.4 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1 }
+  }
+});
+</script>
+
+</body>
+</html>
