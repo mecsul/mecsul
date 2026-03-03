@@ -13,9 +13,9 @@
     font-family:Arial, sans-serif;
 }
 
+/* REMOVE FUNDO PRETO */
 html,body{
     height:100%;
-    background:#000;
     overflow-x:hidden;
 }
 
@@ -27,27 +27,21 @@ html,body{
     width:100%;
     height:100%;
     object-fit:cover;
-    z-index:-3;
-    pointer-events:none;
+    z-index:0;
 }
 
-/* ===== OVERLAY ESCURECIDO ===== */
+/* OVERLAY LEVE */
 .overlay{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.55);
-    z-index:-2;
+    background:rgba(0,0,0,0.35);
+    z-index:1;
 }
 
-/* ===== PARTICULAS ===== */
-#particles-js{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-}
-
-/* ===== CENTRALIZAÇÃO ===== */
+/* CONTEÚDO */
 .wrapper{
+    position:relative;
+    z-index:2;
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -64,7 +58,6 @@ html,body{
     padding:25px;
     box-shadow:0 0 30px rgba(0,255,136,0.5);
     backdrop-filter:blur(8px);
-    animation:fadeIn 0.8s ease-in-out;
     color:#fff;
 }
 
@@ -76,11 +69,6 @@ html,body{
 
 .logo img{
     width:120px;
-    transition:.3s;
-}
-
-.logo img:hover{
-    transform:scale(1.08);
 }
 
 h1{
@@ -126,7 +114,6 @@ input[type="number"]{
 .parcerias label{
     display:block;
     margin-bottom:5px;
-    cursor:pointer;
 }
 
 button{
@@ -155,29 +142,23 @@ button:hover{
     font-weight:bold;
     border-radius:6px;
 }
-
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(10px);}
-    to{opacity:1;transform:translateY(0);}
-}
 </style>
 </head>
 
 <body>
 
 <!-- VIDEO FUNDO -->
-<video autoplay muted loop playsinline id="bg-video" preload="auto">
-    <source src="videos/jfundo.mp4" type="video/mp4">
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="jfundo.mp4?v=3" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
-<div id="particles-js"></div>
 
 <div class="wrapper">
 <div class="container">
 
 <div class="logo">
-    <img src="./logo.png" alt="Logo Mecânica Sul">
+    <img src="logo.png" alt="Logo Mecânica Sul">
 </div>
 
 <h1>Calculadora Oficial</h1>
@@ -274,21 +255,6 @@ let total=reparo+trocaPneu+tuning+kitReparo+pneu+peCabra+corda+chaveInglesa;
 document.getElementById("resultado").innerText=
 "Total: R$ "+total.toLocaleString('pt-BR');
 }
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-<script>
-particlesJS("particles-js",{
-  particles:{
-    number:{value:80},
-    color:{value:"#00ff88"},
-    shape:{type:"circle"},
-    opacity:{value:0.4},
-    size:{value:3},
-    move:{enable:true,speed:1}
-  }
-});
 </script>
 
 </body>
