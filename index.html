@@ -115,7 +115,7 @@ input[type="number"]{
 button{
     width:100%;
     padding:12px;
-    margin-top:20px;
+    margin-top:15px;
     background:#00ff88;
     color:#000;
     border:none;
@@ -128,6 +128,16 @@ button{
 button:hover{
     background:#00cc6a;
     box-shadow:0 0 15px #00ff88;
+}
+
+.btn-limpar{
+    background:#ff4444;
+    color:#fff;
+}
+
+.btn-limpar:hover{
+    background:#cc0000;
+    box-shadow:0 0 15px #ff4444;
 }
 
 .resultado{
@@ -162,44 +172,44 @@ button:hover{
 
 <div class="input-group">
 <label>Reparo (2.500)</label>
-<input type="number" id="reparo" placeholder="Quantidade">
+<input type="number" id="reparo">
 </div>
 
 <div class="input-group">
 <label>Troca de Pneu (2.500)</label>
-<input type="number" id="trocaPneu" placeholder="Quantidade">
+<input type="number" id="trocaPneu">
 </div>
 
 <div class="input-group">
 <label>Tuning (valor do veículo)</label>
-<input type="number" id="tuningValor" placeholder="Ex: 300000">
+<input type="number" id="tuningValor">
 </div>
 
 <h2>🛒 Venda de Itens</h2>
 
 <div class="input-group">
 <label>Kit Reparo (3.500)</label>
-<input type="number" id="kitReparo" placeholder="Quantidade">
+<input type="number" id="kitReparo">
 </div>
 
 <div class="input-group">
 <label>Pneu (2.000)</label>
-<input type="number" id="pneu" placeholder="Quantidade">
+<input type="number" id="pneu">
 </div>
 
 <div class="input-group">
 <label>Pé de Cabra (2.500)</label>
-<input type="number" id="peCabra" placeholder="Quantidade">
+<input type="number" id="peCabra">
 </div>
 
 <div class="input-group">
 <label>Corda (5.000)</label>
-<input type="number" id="corda" placeholder="Quantidade">
+<input type="number" id="corda">
 </div>
 
 <div class="input-group">
 <label>Chave Inglesa (2.500)</label>
-<input type="number" id="chaveInglesa" placeholder="Quantidade">
+<input type="number" id="chaveInglesa">
 </div>
 
 <h2>🤝 Parcerias</h2>
@@ -210,6 +220,7 @@ button:hover{
 </div>
 
 <button onclick="calcular()">CALCULAR TOTAL</button>
+<button class="btn-limpar" onclick="limpar()">LIMPAR TUDO</button>
 
 <div class="resultado" id="resultado">
 Total: R$ 0
@@ -229,16 +240,12 @@ let trocaPneu=(parseFloat(document.getElementById("trocaPneu").value)||0)*2500;
 
 let tuningBase=parseFloat(document.getElementById("tuningValor").value)||0;
 
-// 🔥 Percentual base é acréscimo
 let tuningPercent=0.50;
-
 if(pgs) tuningPercent=0.40;
 if(gravata) tuningPercent=0.35;
 
-// ✅ Agora adiciona ao valor
 let tuning=tuningBase + (tuningBase*tuningPercent);
 
-// Kit com desconto para parceria
 let kitValor=3500;
 if(pgs||gravata) kitValor=2000;
 
@@ -253,6 +260,18 @@ let total=reparo+trocaPneu+tuning+kitReparo+pneu+peCabra+corda+chaveInglesa;
 
 document.getElementById("resultado").innerText=
 "Total: R$ "+total.toLocaleString('pt-BR');
+}
+
+function limpar(){
+
+document.querySelectorAll("input[type='number']").forEach(input=>{
+    input.value="";
+});
+
+document.getElementById("pgs").checked=false;
+document.getElementById("gravata").checked=false;
+
+document.getElementById("resultado").innerText="Total: R$ 0";
 }
 </script>
 
