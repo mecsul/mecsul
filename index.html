@@ -3,251 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora Oficial - Mecânica</title>
+<title>Calculadora Oficial - Mecânica Sul</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+html,body{height:100%;overflow-x:hidden;}
+
+#bg-video{
+position:fixed;top:0;left:0;width:100%;height:100%;
+object-fit:cover;z-index:0;
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg,#000,#111);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+.overlay{
+position:fixed;inset:0;
+background:rgba(0,0,0,0.35);
+z-index:1;
 }
 
-.container {
-    width: 100%;
-    max-width: 500px;
-    background: #0f0f0f;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #00ff88;
+.wrapper{
+position:relative;z-index:2;
+min-height:100vh;
+display:flex;justify-content:center;align-items:center;
+padding:40px 15px;
 }
 
-.tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+.container{
+width:100%;max-width:500px;
+background:rgba(15,15,15,0.95);
+border:1px solid #00ff88;
+border-radius:12px;
+padding:25px;
+box-shadow:0 0 30px rgba(0,255,136,0.5);
+backdrop-filter:blur(8px);
+color:#fff;
 }
 
-.tabs button {
-    flex: 1;
-    padding: 10px;
-    background: transparent;
-    border: 2px solid #00ff88;
-    color: #00ff88;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
+.logo{display:flex;justify-content:center;margin-bottom:15px;}
+.logo img{width:120px;}
+
+h1{text-align:center;margin-bottom:20px;font-size:22px;}
+
+.tabs{display:flex;gap:10px;margin-bottom:15px;}
+.tabs button{
+flex:1;padding:10px;
+background:#111;color:#00ff88;
+border:1px solid #00ff88;
+cursor:pointer;border-radius:6px;
+}
+.tabs button.active{
+background:#00ff88;color:#000;
 }
 
-.tabs button.active {
-    background: #00ff88;
-    color: #000;
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+h2{
+margin-top:15px;margin-bottom:10px;
+font-size:15px;
+border-bottom:1px solid #00ff88;
+padding-bottom:5px;
 }
 
-.section {
-    display: none;
+.input-group{margin-bottom:10px;}
+label{font-size:13px;display:block;margin-bottom:4px;}
+
+input[type="number"]{
+width:100%;padding:8px;
+background:#000;border:1px solid #00ff88;
+color:#fff;border-radius:6px;
 }
 
-.section.active {
-    display: block;
+button{
+width:100%;padding:12px;margin-top:12px;
+background:#00ff88;color:#000;
+border:none;font-weight:bold;
+cursor:pointer;border-radius:6px;
+transition:.3s;
+}
+button:hover{background:#00cc6a;box-shadow:0 0 15px #00ff88;}
+
+.btn-limpar{background:#ff4444;color:#fff;}
+.btn-limpar:hover{background:#cc0000;box-shadow:0 0 15px #ff4444;}
+
+.resultado{
+margin-top:15px;padding:12px;
+border:1px solid #00ff88;
+text-align:center;font-weight:bold;
+border-radius:6px;
 }
 
-h3 {
-    margin: 15px 0 10px;
-    border-bottom: 1px solid #00ff88;
-    padding-bottom: 5px;
-    color: #00ff88;
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    background: #000;
-    border: 2px solid #00ff88;
-    border-radius: 6px;
-    color: #00ff88;
-}
-
-button.calc {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background: #00ff88;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button.clear {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px;
-    background: #ff4444;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #fff;
-}
-
-.result {
-    margin-top: 15px;
-    font-size: 18px;
-    text-align: center;
+.bloco-parceria{
+border:1px solid #00ff88;
+padding:12px;
+border-radius:6px;
+margin-bottom:20px;
 }
 </style>
 </head>
 
 <body>
 
+<video autoplay muted loop playsinline id="bg-video">
+<source src="jfundo.mp4?v=3" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="wrapper">
 <div class="container">
 
+<div class="logo">
+<img src="logo.png" alt="Logo Mecânica Sul">
+</div>
+
+<h1>Calculadora Oficial</h1>
+
 <div class="tabs">
-    <button class="active" onclick="trocarAba('normal', this)">Serviços</button>
-    <button onclick="trocarAba('parceria', this)">Parcerias</button>
+<button class="active" onclick="trocarAba('normal',this)">Serviços</button>
+<button onclick="trocarAba('parceria',this)">Parcerias</button>
 </div>
 
 <!-- ABA NORMAL -->
-<div id="normal" class="section active">
+<div id="normal" class="tab-content active">
 
-<h3>🔧 Serviços</h3>
+<h2>🔧 Serviços</h2>
+<div class="input-group"><label>Reparo (2.500)</label><input type="number" id="n_reparo"></div>
+<div class="input-group"><label>Troca de Pneu (2.500)</label><input type="number" id="n_troca"></div>
+<div class="input-group"><label>Tuning (50%)</label><input type="number" id="n_tuning"></div>
 
-<label>Reparo (2.500)</label>
-<input type="number" id="reparo">
+<h2>🛒 Venda de Itens</h2>
+<div class="input-group"><label>Kit Reparo (3.500)</label><input type="number" id="n_kit"></div>
+<div class="input-group"><label>Pneu (2.000)</label><input type="number" id="n_pneu"></div>
+<div class="input-group"><label>Pé de Cabra (2.500)</label><input type="number" id="n_pe"></div>
+<div class="input-group"><label>Corda (5.000)</label><input type="number" id="n_corda"></div>
+<div class="input-group"><label>Chave Inglesa (2.500)</label><input type="number" id="n_chave"></div>
 
-<label>Troca de Pneu (2.500)</label>
-<input type="number" id="pneuTroca">
-
-<label>Tuning (50%)</label>
-<input type="number" id="tuning" placeholder="Valor base da tunagem">
-
-<h3>🛒 Venda de Itens</h3>
-
-<label>Kit Reparo (3.500)</label>
-<input type="number" id="kit">
-
-<label>Pneu (2.000)</label>
-<input type="number" id="pneuVenda">
-
-<label>Pé de Cabra (2.500)</label>
-<input type="number" id="peCabra">
-
-<label>Corda (5.000)</label>
-<input type="number" id="corda">
-
-<label>Chave Inglesa (2.500)</label>
-<input type="number" id="chave">
-
-<button class="calc" onclick="calcularNormal()">CALCULAR TOTAL</button>
-<button class="clear" onclick="limpar()">LIMPAR TUDO</button>
-
-<div class="result" id="resultadoNormal"></div>
+<button onclick="calcularNormal()">CALCULAR</button>
+<div class="resultado" id="resultadoNormal">Total: R$ 0</div>
 
 </div>
 
-<!-- ABA PARCERIA -->
-<div id="parceria" class="section">
+<!-- ABA PARCERIAS -->
+<div id="parceria" class="tab-content">
 
-<h3>🤝 Serviços (Parceria)</h3>
+<!-- PGS -->
+<div class="bloco-parceria">
+<h2>🤝 PGS (Pegasus)</h2>
 
-<label>Reparo (2.000)</label>
-<input type="number" id="reparoP">
+<h2>🔧 Serviços</h2>
+<div class="input-group"><label>Reparo (2.500)</label><input type="number" id="p_reparo"></div>
+<div class="input-group"><label>Troca de Pneu (2.500)</label><input type="number" id="p_troca"></div>
+<div class="input-group"><label>Tuning (40%)</label><input type="number" id="p_tuning"></div>
 
-<label>Troca de Pneu (2.000)</label>
-<input type="number" id="pneuTrocaP">
+<h2>🛒 Venda de Itens</h2>
+<div class="input-group"><label>Kit Reparo (2.000)</label><input type="number" id="p_kit"></div>
+<div class="input-group"><label>Pneu (2.000)</label><input type="number" id="p_pneu"></div>
+<div class="input-group"><label>Pé de Cabra (2.500)</label><input type="number" id="p_pe"></div>
+<div class="input-group"><label>Corda (5.000)</label><input type="number" id="p_corda"></div>
+<div class="input-group"><label>Chave Inglesa (2.500)</label><input type="number" id="p_chave"></div>
 
-<label>Tuning (30%)</label>
-<input type="number" id="tuningP" placeholder="Valor base da tunagem">
+<button onclick="calcularPGS()">CALCULAR PGS</button>
+<div class="resultado" id="resultadoPGS">Total: R$ 0</div>
+</div>
 
-<h3>🛒 Venda de Itens (Parceria)</h3>
+<!-- GRAVATA -->
+<div class="bloco-parceria">
+<h2>🤝 Os Gravata</h2>
 
-<label>Kit Reparo (3.000)</label>
-<input type="number" id="kitP">
+<h2>🔧 Serviços</h2>
+<div class="input-group"><label>Reparo (2.500)</label><input type="number" id="g_reparo"></div>
+<div class="input-group"><label>Troca de Pneu (2.500)</label><input type="number" id="g_troca"></div>
+<div class="input-group"><label>Tuning (35%)</label><input type="number" id="g_tuning"></div>
 
-<label>Pneu (1.500)</label>
-<input type="number" id="pneuVendaP">
+<h2>🛒 Venda de Itens</h2>
+<div class="input-group"><label>Kit Reparo (2.000)</label><input type="number" id="g_kit"></div>
+<div class="input-group"><label>Pneu (2.000)</label><input type="number" id="g_pneu"></div>
+<div class="input-group"><label>Pé de Cabra (2.500)</label><input type="number" id="g_pe"></div>
+<div class="input-group"><label>Corda (3.000)</label><input type="number" id="g_corda"></div>
+<div class="input-group"><label>Chave Inglesa (2.500)</label><input type="number" id="g_chave"></div>
 
-<label>Pé de Cabra (2.000)</label>
-<input type="number" id="peCabraP">
-
-<label>Corda (4.000)</label>
-<input type="number" id="cordaP">
-
-<label>Chave Inglesa (2.000)</label>
-<input type="number" id="chaveP">
-
-<button class="calc" onclick="calcularParceria()">CALCULAR TOTAL</button>
-<button class="clear" onclick="limpar()">LIMPAR TUDO</button>
-
-<div class="result" id="resultadoParceria"></div>
+<button onclick="calcularGravata()">CALCULAR GRAVATA</button>
+<div class="resultado" id="resultadoGravata">Total: R$ 0</div>
+</div>
 
 </div>
 
+<button class="btn-limpar" onclick="limpar()">LIMPAR TUDO</button>
+
+</div>
 </div>
 
 <script>
-function trocarAba(id, botao){
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
 
-    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-    botao.classList.add('active');
+function trocarAba(id,botao){
+document.querySelectorAll(".tab-content").forEach(e=>e.classList.remove("active"));
+document.querySelectorAll(".tabs button").forEach(e=>e.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+botao.classList.add("active");
 }
 
 function calcularNormal(){
-    let total = 0;
+let total=
+(n_reparo.value||0)*2500+
+(n_troca.value||0)*2500+
+(n_tuning.value||0)*0.50+
+(n_kit.value||0)*3500+
+(n_pneu.value||0)*2000+
+(n_pe.value||0)*2500+
+(n_corda.value||0)*5000+
+(n_chave.value||0)*2500;
 
-    total += (parseFloat(reparo.value) || 0) * 2500;
-    total += (parseFloat(pneuTroca.value) || 0) * 2500;
-    total += (parseFloat(tuning.value) || 0) * 0.5;
-
-    total += (parseFloat(kit.value) || 0) * 3500;
-    total += (parseFloat(pneuVenda.value) || 0) * 2000;
-    total += (parseFloat(peCabra.value) || 0) * 2500;
-    total += (parseFloat(corda.value) || 0) * 5000;
-    total += (parseFloat(chave.value) || 0) * 2500;
-
-    resultadoNormal.innerText = "Total: R$ " + total.toLocaleString('pt-BR');
+resultadoNormal.innerText="Total: R$ "+Number(total).toLocaleString('pt-BR');
 }
 
-function calcularParceria(){
-    let total = 0;
+function calcularPGS(){
+let total=
+(p_reparo.value||0)*2500+
+(p_troca.value||0)*2500+
+(p_tuning.value||0)*0.40+
+(p_kit.value||0)*2000+
+(p_pneu.value||0)*2000+
+(p_pe.value||0)*2500+
+(p_corda.value||0)*5000+
+(p_chave.value||0)*2500;
 
-    total += (parseFloat(reparoP.value) || 0) * 2000;
-    total += (parseFloat(pneuTrocaP.value) || 0) * 2000;
-    total += (parseFloat(tuningP.value) || 0) * 0.3;
+resultadoPGS.innerText="Total: R$ "+Number(total).toLocaleString('pt-BR');
+}
 
-    total += (parseFloat(kitP.value) || 0) * 3000;
-    total += (parseFloat(pneuVendaP.value) || 0) * 1500;
-    total += (parseFloat(peCabraP.value) || 0) * 2000;
-    total += (parseFloat(cordaP.value) || 0) * 4000;
-    total += (parseFloat(chaveP.value) || 0) * 2000;
+function calcularGravata(){
+let total=
+(g_reparo.value||0)*2500+
+(g_troca.value||0)*2500+
+(g_tuning.value||0)*0.35+
+(g_kit.value||0)*2000+
+(g_pneu.value||0)*2000+
+(g_pe.value||0)*2500+
+(g_corda.value||0)*3000+
+(g_chave.value||0)*2500;
 
-    resultadoParceria.innerText = "Total: R$ " + total.toLocaleString('pt-BR');
+resultadoGravata.innerText="Total: R$ "+Number(total).toLocaleString('pt-BR');
 }
 
 function limpar(){
-    document.querySelectorAll("input").forEach(input => input.value = "");
-    resultadoNormal.innerText = "";
-    resultadoParceria.innerText = "";
+document.querySelectorAll("input").forEach(i=>i.value="");
+document.querySelectorAll(".resultado").forEach(r=>r.innerText="Total: R$ 0");
 }
+
 </script>
 
 </body>
