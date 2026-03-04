@@ -13,13 +13,11 @@
     font-family:Arial, sans-serif;
 }
 
-/* REMOVE FUNDO PRETO */
 html,body{
     height:100%;
     overflow-x:hidden;
 }
 
-/* ===== VIDEO FUNDO ===== */
 #bg-video{
     position:fixed;
     top:0;
@@ -30,7 +28,6 @@ html,body{
     z-index:0;
 }
 
-/* OVERLAY LEVE */
 .overlay{
     position:fixed;
     inset:0;
@@ -38,7 +35,6 @@ html,body{
     z-index:1;
 }
 
-/* CONTEÚDO */
 .wrapper{
     position:relative;
     z-index:2;
@@ -147,7 +143,6 @@ button:hover{
 
 <body>
 
-<!-- VIDEO FUNDO -->
 <video autoplay muted loop playsinline id="bg-video">
     <source src="jfundo.mp4?v=3" type="video/mp4">
 </video>
@@ -233,13 +228,17 @@ let reparo=(parseFloat(document.getElementById("reparo").value)||0)*2500;
 let trocaPneu=(parseFloat(document.getElementById("trocaPneu").value)||0)*2500;
 
 let tuningBase=parseFloat(document.getElementById("tuningValor").value)||0;
+
+// 🔥 Percentual base é acréscimo
 let tuningPercent=0.50;
 
 if(pgs) tuningPercent=0.40;
 if(gravata) tuningPercent=0.35;
 
-let tuning=tuningBase*tuningPercent;
+// ✅ Agora adiciona ao valor
+let tuning=tuningBase + (tuningBase*tuningPercent);
 
+// Kit com desconto para parceria
 let kitValor=3500;
 if(pgs||gravata) kitValor=2000;
 
