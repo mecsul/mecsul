@@ -80,6 +80,7 @@ border:none;font-weight:bold;
 cursor:pointer;border-radius:6px;
 transition:.3s;
 }
+
 button:hover{background:#00cc6a;box-shadow:0 0 15px #00ff88;}
 
 .btn-limpar{background:#ff4444;color:#fff;}
@@ -129,7 +130,7 @@ margin-bottom:20px;
 <h2>🔧 Serviços</h2>
 <div class="input-group"><label>Reparo (2.500)</label><input type="number" id="n_reparo"></div>
 <div class="input-group"><label>Troca de Pneu (2.500)</label><input type="number" id="n_troca"></div>
-<div class="input-group"><label>Tuning (50%)</label><input type="number" id="n_tuning"></div>
+<div class="input-group"><label>Tuning (valor base)</label><input type="number" id="n_tuning"></div>
 
 <h2>🛒 Venda de Itens</h2>
 <div class="input-group"><label>Kit Reparo (3.500)</label><input type="number" id="n_kit"></div>
@@ -146,14 +147,13 @@ margin-bottom:20px;
 <!-- ABA PARCERIAS -->
 <div id="parceria" class="tab-content">
 
-<!-- PGS -->
 <div class="bloco-parceria">
 <h2>🤝 PGS (Pegasus)</h2>
 
 <h2>🔧 Serviços</h2>
 <div class="input-group"><label>Reparo (2.500)</label><input type="number" id="p_reparo"></div>
 <div class="input-group"><label>Troca de Pneu (2.500)</label><input type="number" id="p_troca"></div>
-<div class="input-group"><label>Tuning (40%)</label><input type="number" id="p_tuning"></div>
+<div class="input-group"><label>Tuning (valor base)</label><input type="number" id="p_tuning"></div>
 
 <h2>🛒 Venda de Itens</h2>
 <div class="input-group"><label>Kit Reparo (2.000)</label><input type="number" id="p_kit"></div>
@@ -166,14 +166,13 @@ margin-bottom:20px;
 <div class="resultado" id="resultadoPGS">Total: R$ 0</div>
 </div>
 
-<!-- GRAVATA -->
 <div class="bloco-parceria">
 <h2>🤝 Os Gravata</h2>
 
 <h2>🔧 Serviços</h2>
 <div class="input-group"><label>Reparo (2.500)</label><input type="number" id="g_reparo"></div>
 <div class="input-group"><label>Troca de Pneu (2.500)</label><input type="number" id="g_troca"></div>
-<div class="input-group"><label>Tuning (35%)</label><input type="number" id="g_tuning"></div>
+<div class="input-group"><label>Tuning (valor base)</label><input type="number" id="g_tuning"></div>
 
 <h2>🛒 Venda de Itens</h2>
 <div class="input-group"><label>Kit Reparo (2.000)</label><input type="number" id="g_kit"></div>
@@ -206,7 +205,7 @@ function calcularNormal(){
 let total=
 (n_reparo.value||0)*2500+
 (n_troca.value||0)*2500+
-(n_tuning.value||0)*0.50+
+(n_tuning.value||0)*1.5+
 (n_kit.value||0)*3500+
 (n_pneu.value||0)*2000+
 (n_pe.value||0)*2500+
@@ -220,7 +219,7 @@ function calcularPGS(){
 let total=
 (p_reparo.value||0)*2500+
 (p_troca.value||0)*2500+
-(p_tuning.value||0)*0.40+
+(p_tuning.value||0)*1.4+
 (p_kit.value||0)*2000+
 (p_pneu.value||0)*2000+
 (p_pe.value||0)*2500+
@@ -234,7 +233,7 @@ function calcularGravata(){
 let total=
 (g_reparo.value||0)*2500+
 (g_troca.value||0)*2500+
-(g_tuning.value||0)*0.35+
+(g_tuning.value||0)*1.35+
 (g_kit.value||0)*2000+
 (g_pneu.value||0)*2000+
 (g_pe.value||0)*2500+
